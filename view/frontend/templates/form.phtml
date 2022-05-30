@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \AHT\Question\Block\Form $block */
+//phpcs:disable Generic.Files.LineLength
+?>
+<div class="block question-add">
+    <div class="block-content">
+        <form action="<?= $block->escapeUrl($block->getAction()) ?>" class="question-form" method="post" id="question-form" data-role="product-question-form" data-bind="scope: 'question-form'">
+            <?= $block->getChildHtml('form_fields_before') ?>
+            <fieldset class="fieldset question-fieldset" data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>">
+                <legend class="legend question-legend"><span><?= $block->escapeHtml(__("You're questioning:")) ?></span><br><strong><?= $block->escapeHtml($block->getProductInfo()->getName()) ?></strong></legend><br />
+                <div class="field question-field-name required">
+                    <label for="name_field" class="label"><span><?= $block->escapeHtml(__('Name')) ?></span></label>
+                    <div class="control">
+                        <input type="hidden" name="entity_id" id="entity_id" class="input-text" value="<?= $block->getProductInfo()->getId() ?>" />
+                        <?php $block->getDataCustomer() ?>
+                        <input type="text" name="name" id="name_field" class="input-text" data-validate="{required:true}" value="" />
+                    </div>
+                </div>
+                <div class="field question-field-email required">
+                    <label for="email_field" class="label"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
+                    <div class="control">
+                        <input type="email" name="email" id="email_field" class="input-text" data-validate="{required:true}" data-bind="value: question().email" />
+                    </div>
+                </div>
+                <div class="field question-field-text required">
+                    <label for="question_field" class="label"><span><?= $block->escapeHtml(__('Question')) ?></span></label>
+                    <div class="control">
+                        <textarea name="question" id="question_field" cols="5" rows="3" data-validate="{required:true}" data-bind="value: question().question"></textarea>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="actions-toolbar question-form-actions">
+                <div class="primary actions-primary">
+                    <button type="submit" class="action submit primary"><span><?= $block->escapeHtml(__('Submit Question')) ?></span></button>
+                    <button type="reset" class="action submit secondery"><span><?= $block->escapeHtml(__('Reset Form')) ?></span></button>
+                </div>
+            </div>
+        </form>
+        <script type="text/x-magento-init">
+            {
+                    "#question-form": {
+                        "AHT_Question/js/error-placement": {},
+                        "AHT_Question/js/validate-question": {},
+                        "AHT_Question/js/submit-question": {}
+                    }
+                }
+            </script>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var AHT\Question\Block\Product\Question $block */
+?>
+<div id="product-question-container" class="question-container" data-role="product-question">
+    <h3 class="title">Questions</h3>
+    <?php
+    $data = $block->getQuestionProductId()->getData();
+    if ($data) {
+        foreach ($data as $key => $value) {
+            if ($value['status'] != 'deny') {
+                echo '<div class="product-question">
+                        <div class="question">
+                            <h5 class="title">Question:</h5>
+                            <div class="content">' . $value['question'] . '</div>
+                        </div>
+                        <div class="question-time question">
+                            <h6 class="title">Name:</h6>
+                            <div class="content">' . $value['name'] . '</div>
+                        </div>
+                        <div class="question-time question">
+                            <h6 class="title">Date Question:</h6>
+                            <div class="content">' . $value['created_at'] . '</div>
+                        </div>
+                        <div class="question-answer question">
+                            <h5 class="title">Answer:</h5>
+                            <div class="content">' . $value['answer'] . '</div>
+                        </div>
+                        <div class="question-time question">
+                            <h6 class="title">Date Answer:</h6>
+                            <div class="content">' . $value['updated_at'] . '</div>
+                        </div>
+                    </div>';
+            } else {
+                echo '<div class="product-question">
+                        <div class="question">
+                            <div class="content"><b>' . $value['name'] . "'s</b> Question is not censored" . '</div>
+                        </div>
+                    </div>';
+            }
+        }
+    } else {
+        echo 'No question this product';
+    }
+    ?>
+</div>
+<?= $block->getChildHtml() ?>

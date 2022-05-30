@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="AHT_Question::css/question.css" />
+    </head>
+    <body>
+        <referenceBlock name="product.info.details">
+            <block class="AHT\Question\Block\Product\Question" name="question.tab" as="question" template="AHT_Question::question.phtml" group="detailed_info">
+                <arguments>
+                    <argument name="sort_order" xsi:type="string">40</argument>
+                </arguments>
+                <block class="AHT\Question\Block\Form" name="product.question.form" as="question_form" template="AHT_Question::form.phtml">
+                    <container name="product.question.form.fields.before" as="form_question_before" label="Question Form Fields Before"/>
+                </block>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,59 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  import style slick
+//  _____________________________________________
+
+@import 'slick/slick.less';
+@import 'slick/slick-theme.less';
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common =true) {
+    .question-slider-container {
+        .slider-title {
+            margin-bottom: 1%;
+            padding-bottom: 1%;
+            border-bottom: 1px solid #ededed81;
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        .product-question {
+            margin-right: 7%;
+            border: 1px solid #ededed;
+            padding: 2%;
+            margin-bottom: 11%;
+
+            .question {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+
+                .content {
+                    margin-left: 5%;
+                }
+            }
+
+            .question-time {
+                justify-content: end;
+
+                .title {
+                    margin: 6px 0;
+                }
+
+                .content {
+                    margin-left: 1%;
+                    font-size: 11px;
+                }
+            }
+        }
+    }
+}

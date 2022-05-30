@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="AHT_Question::question" title="Question" sortOrder="100">
+                    <resource id="AHT_Question::question_list" title="Question list" sortOrder="1" />
+                    <resource id="AHT_Question::question_answer" title="Answer the Question" sortOrder="2" />
+                    <resource id="AHT_Question::question_delete_answer" title="Delete the Question" sortOrder="3" />
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

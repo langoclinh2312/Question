@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">aht__question_form.question_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back" class="AHT\Question\Block\Adminhtml\Question\Edit\BackButton"/>
+            <button name="save" class="AHT\Question\Block\Adminhtml\Question\Edit\SaveButton"/>
+            <button name="save_and_continue" class="AHT\Question\Block\Adminhtml\Question\Edit\SaveAndContinueButton"/>
+        </buttons>
+        <namespace>aht_question_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>aht_question_form.question_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="question_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="*/*/save"/>
+        </settings>
+        <dataProvider name="question_form_data_source" class="AHT\Question\Model\Question\DataProvider">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label>General</label>
+        </settings>
+        <field name="name" formElement="input" sortOrder="10">
+            <settings>
+                <elementTmpl>ui/form/element/text</elementTmpl>
+                <label translate="true">Name</label>
+                <imports>
+                    <link name="value">${ $.provider }:data.question.name</link>
+                </imports>
+            </settings>
+        </field>
+        <field name="question" formElement="input" sortOrder="20">
+            <settings>
+                <elementTmpl>ui/form/element/text</elementTmpl>
+                <label translate="true">Question</label>
+                <imports>
+                    <link name="value">${ $.provider }:data.question.question</link>
+                </imports>
+            </settings>
+        </field>
+        <field name="status" formElement="select" sortOrder="40">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Question</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>selections</dataType>
+                <label translate="true">Status</label>
+                <dataScope>status</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="AHT\Question\Ui\Component\Listing\Column\ListOptionForm" />
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="answer" formElement="input" sortOrder="80">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Answer</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="source" xsi:type="string">answer</item>
+                    <item name="dataScope" xsi:type="string">answer</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

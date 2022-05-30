@@ -1,0 +1,68 @@
+<?php
+
+/** @var \AHT\Question\Block\Widget\Question $block */
+?>
+
+<div class="question-slider-container" data-role="product-question">
+    <h3 class="title slider-title"><?= $block->escapeHtmlAttr(__($block->getData('slidetoshow'))) ?></h3>
+    <div class="question-slider">
+        <?php
+        $data = $block->getList();
+        if (!empty($data)) {
+            foreach ($data as $item) {
+                if ($item->getStatus() != 'deny') {
+                    echo '
+                    <div class="question-item">
+                        <div class="product-question">
+                            <h4 class="title product-name">' . $block->getProductName($item->getEntity_id()) . '</h4>
+                            <div class="question">
+                                <h5 class="title">' . $block->escapeHtmlAttr(__('Questions')) . ':</h5>
+                                <div class="content">' . $item->getQuestion() . '</div>
+                            </div>
+                            <div class="question-time question">
+                                <h6 class="title">' . $block->escapeHtmlAttr(__('Name')) . ':</h6>
+                                <div class="content">' . $item->getName()  . '</div>
+                            </div>
+                            <div class="question-time question">
+                                <h6 class="title">' . $block->escapeHtmlAttr(__('Date Question')) . ':</h6>
+                                <div class="content">' . $item->getCreated_at() . '</div>
+                            </div>
+                            <div class="question-answer question">
+                                <h5 class="title">' . $block->escapeHtmlAttr(__('Answer')) . ':</h5>
+                                <div class="content">' . $item->getAnswer() . '</div>
+                            </div>
+                            <div class="question-time question">
+                                <h6 class="title">' . $block->escapeHtmlAttr(__('Date Answer')) . ':</h6>
+                                <div class="content">' . $item->getUpdated_at() . '</div>
+                            </div>
+                        </div>
+                    </div>';
+                } else {
+                    echo '
+                    <div class="question-item">
+                        <div class="question">
+                            <div class="content"><b>' . $item->getName() . "'s</b> Question is not censored" . '</div>
+                        </div>
+                    </div>';
+                }
+            }
+        } else {
+            echo $block->escapeHtmlAttr(__('There are no Questions at the moment'));
+        }
+        ?>
+    </div>
+</div>
+<script>
+    require([
+        'jquery',
+        'slick'
+    ], function($) {
+        $(document).ready(function() {
+            $(".question-slider").slick({
+                infinite: true,
+                slidesToShow: <?= $block->getData('slidetoscroll') ?>,
+                slidesToScroll: <?= $block->getData('slidetoscroll') ?>
+            });
+        });
+    });
+</script>

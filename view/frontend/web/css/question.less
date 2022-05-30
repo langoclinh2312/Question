@@ -1,0 +1,44 @@
+.question-container {
+    margin-bottom: 2%;
+    padding: 1%;
+    box-sizing: border-box;
+    border: 1px solid #ededed;
+
+    .title {
+        text-align: center;
+    }
+
+    .product-question {
+        padding-bottom: 1%;
+        border-bottom: 1px solid;
+
+        .question {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            .content {
+                margin-left: 5%;
+            }
+        }
+
+        .question-time {
+            justify-content: end;
+
+            .title {
+                margin: 6px 0;
+            }
+
+            .content {
+                margin-left: 1%;
+                font-size: 11px;
+            }
+        }
+    }
+
+    &:last-child {
+        .product-question {
+            border: none;
+        }
+    }
+}
