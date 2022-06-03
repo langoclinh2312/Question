@@ -17,7 +17,7 @@ class Form extends \Magento\Framework\View\Element\Template
     protected $jsLayout;
 
     /**
-     * @param \Magento\Customer\Model\Session
+     * @param \Magento\Customer\Model\SessionFactory
      */
     private $_customerSession;
 
@@ -28,7 +28,7 @@ class Form extends \Magento\Framework\View\Element\Template
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
         \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
-        \Magento\Customer\Model\Session $customerSession,
+        \Magento\Customer\Model\SessionFactory $customerSession,
         array $data = []
     ) {
         $this->productRepository = $productRepository;
@@ -84,10 +84,9 @@ class Form extends \Magento\Framework\View\Element\Template
      */
     public function getDataCustomer()
     {
-        if ($this->_customerSession->isLoggedIn()) {
-            echo '123';
-        } else {
-            echo '456';
+        $customer = $this->_customerSession->create();
+        if ($customer->isLoggedIn()) {
+            return $customer->getCustomer();
         }
     }
 }

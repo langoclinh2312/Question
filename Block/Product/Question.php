@@ -17,6 +17,11 @@ class Question extends \Magento\Framework\View\Element\Template
     private $_questionRepository;
 
     /**
+     * @param \AHT\Question\Model\ResourceModel\Question\CollectionFactory
+     */
+    private $_questionCollectionFactory;
+
+    /**
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param array $data
      */
@@ -24,9 +29,12 @@ class Question extends \Magento\Framework\View\Element\Template
         \Magento\Framework\Registry $registry,
         \Magento\Framework\View\Element\Template\Context $context,
         \AHT\Question\Model\QuestionRepository $questionRepository,
+
+        \AHT\Question\Model\ResourceModel\Question\CollectionFactory $questionCollectionFactory,
         array $data = []
     ) {
         $this->_questionRepository = $questionRepository;
+        $this->_questionCollectionFactory = $questionCollectionFactory;
         $this->_coreRegistry = $registry;
         parent::__construct($context, $data);
 
@@ -82,15 +90,7 @@ class Question extends \Magento\Framework\View\Element\Template
      */
     public function getCollectionSize()
     {
-        // $collection = $this->_reviewsColFactory->create()->addStoreFilter(
-        //     $this->_storeManager->getStore()->getId()
-        // )->addStatusFilter(
-        //     \Magento\Review\Model\Review::STATUS_APPROVED
-        // )->addEntityFilter(
-        //     'product',
-        //     $this->getProductId()
-        // );
-
-        // return $collection->getSize();
+        $collection = $this->_questionCollectionFactory->create()->addFilter('entity_id', $this->getProductId());
+        return $collection->getSize();
     }
 }

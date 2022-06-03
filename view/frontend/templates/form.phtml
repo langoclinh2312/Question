@@ -19,13 +19,13 @@
                     <div class="control">
                         <input type="hidden" name="entity_id" id="entity_id" class="input-text" value="<?= $block->getProductInfo()->getId() ?>" />
                         <?php $block->getDataCustomer() ?>
-                        <input type="text" name="name" id="name_field" class="input-text" data-validate="{required:true}" value="" />
+                        <input type="text" name="name" id="name_field" class="input-text" data-validate="{required:true}" value="<?= !empty($block->getDataCustomer()) ? $block->getDataCustomer()->getName() : '' ?>" />
                     </div>
                 </div>
                 <div class="field question-field-email required">
                     <label for="email_field" class="label"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
                     <div class="control">
-                        <input type="email" name="email" id="email_field" class="input-text" data-validate="{required:true}" data-bind="value: question().email" />
+                        <input type="email" name="email" id="email_field" class="input-text" data-validate="{required:true}" value="<?= !empty($block->getDataCustomer()) ? $block->getDataCustomer()->getEmail() : '' ?>" />
                     </div>
                 </div>
                 <div class="field question-field-text required">
